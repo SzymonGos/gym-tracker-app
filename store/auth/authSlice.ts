@@ -48,6 +48,10 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+export const signOutUser = createAsyncThunk('user/signOut', async () => {
+  await supabase.auth.signOut();
+});
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -80,6 +84,15 @@ export const userSlice = createSlice({
       .addCase(signInUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+      })
+
+      .addCase(signOutUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(signOutUser.fulfilled, state => {
+        state.isLoading = false;
+        state.user = null;
+        state.session = null;
       });
   },
 });
