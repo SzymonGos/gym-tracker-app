@@ -1,14 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { use, useState } from 'react';
+import Register from '@/components/Register/Register';
 
-const Register = () => {
-  return (
-    <View>
-      <Text>Register</Text>
-    </View>
-  );
+const RegisterPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  return <Register />;
 };
 
-export default Register;
-
-const styles = StyleSheet.create({});
+export default RegisterPage;
