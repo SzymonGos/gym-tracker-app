@@ -1,11 +1,23 @@
+import { RootState } from '@/store';
 import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+  const user = useSelector((state: RootState) => state.user);
+
   return (
     <View style={styles.container}>
-      <Text style={{ marginBottom: 10 }}>Welcome to the Gym Tracker App</Text>
+      {user?.session ? (
+        <Text style={{ marginBottom: 10 }}>
+          Welcome{' '}
+          {user.session.user.user_metadata.display_name ||
+            user.session.user.email}
+        </Text>
+      ) : (
+        <Text style={{ marginBottom: 10 }}>Welcome to the Gym Tracker App</Text>
+      )}
       <Link href="/login">
         <Text style={styles.link}>Login</Text>
       </Link>
