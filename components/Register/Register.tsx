@@ -1,35 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormControl } from '../ui/form-control';
 import ThemedView from '../ThemedView/ThemedView';
 import FormInput from '../Form/FormInput';
 import { Button, ButtonText } from '../ui/button';
 
-const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+type TRegisterProps = {
+  email: string;
+  userName: string;
+  password: string;
+  handleSubmit: () => void;
+  setEmail: (email: string) => void;
+  setUserName: (userName: string) => void;
+  setPassword: (password: string) => void;
+};
 
-  const handleSubmit = async () => {
-    console.log('submitting', { email, password });
-  };
-
+const Register = ({
+  email,
+  userName,
+  password,
+  handleSubmit,
+  setEmail,
+  setUserName,
+  setPassword,
+}: TRegisterProps) => {
   return (
     <ThemedView className="p-10">
       <FormControl className="flex gap-5">
         <FormInput
-          label="Email"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={setEmail}
+          label="Username"
+          placeholder="Enter your user name"
+          value={userName}
+          onChangeText={userName => setUserName(userName)}
           type="text"
-          autoFocus
-          keyboardType="email-address"
         />
         <FormInput
           label="Password"
           placeholder="Enter your password"
           value={password}
-          onChangeText={setPassword}
+          onChangeText={password => setPassword(password)}
           type="password"
+        />
+        <FormInput
+          label="Email"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={email => setEmail(email)}
+          type="text"
+          autoFocus
+          keyboardType="email-address"
         />
       </FormControl>
       <Button onPress={handleSubmit} className="mt-5">

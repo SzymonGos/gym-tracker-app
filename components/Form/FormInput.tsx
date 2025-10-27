@@ -1,5 +1,4 @@
-import { StyleSheet } from 'react-native';
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { FormControlLabelText } from '../ui/form-control';
 import { Input, InputField } from '../ui/input';
 import ThemedView from '../ThemedView/ThemedView';
@@ -7,7 +6,7 @@ import ThemedView from '../ThemedView/ThemedView';
 type TFormInputProps = {
   label: string;
   placeholder: string;
-  type: 'text' | 'password';
+  type?: 'text' | 'password';
   value: string;
   onChangeText: (text: string) => void;
   error?: string;
@@ -21,7 +20,7 @@ const FormInput = ({
   placeholder,
   value,
   onChangeText,
-  type,
+  type = 'text',
   autoFocus = false,
   keyboardType = 'default',
 }: TFormInputProps) => {
