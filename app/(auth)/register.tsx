@@ -1,11 +1,8 @@
-import React, { use, useState } from 'react';
-import Register from '@/components/Register/Register';
+import React from 'react';
+import RegisterContainer from '@/components/Register/RegisterContainer';
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  return <Register />;
+  return <RegisterContainer />;
 };
 
 export default RegisterPage;
