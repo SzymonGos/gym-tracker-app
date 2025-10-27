@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Login from './Login';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
 import { signInUser } from '@/store/auth/authSlice';
+import { useForm } from 'react-hook-form';
+
+export type TLoginFormProps = {
+  email: string;
+  password: string;
+};
 
 const LoginContainer = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { control, handleSubmit } = useForm<TLoginFormProps>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data: TLoginFormProps) => {
     try {
-      await dispatch(signInUser({ email, password }));
+      await dispatch(
+        signInUser({ email: data.email, password: data.password })
+      );
     } catch (error) {
       console.error(error);
     }
   };
-  return (
-    <Login
-      email={email}
-      password={password}
-      setEmail={setEmail}
-      setPassword={setPassword}
-      handleSubmit={handleSubmit}
-    />
-  );
+  return <Login control={control} handleSubmit={handleSubmit(onSubmit)} />;
 };
 
 export default LoginContainer;

@@ -1,53 +1,43 @@
 import React from 'react';
 import { FormControl } from '../ui/form-control';
 import ThemedView from '../ThemedView/ThemedView';
-import FormInput from '../Form/FormInput';
 import { Button, ButtonText } from '../ui/button';
+import { Control } from 'react-hook-form';
+import { TRegisterFormProps } from './RegisterContainer';
+import FormInput from '../Form/FormInput';
 
 type TRegisterProps = {
-  email: string;
-  userName: string;
-  password: string;
+  control: Control<TRegisterFormProps>;
   handleSubmit: () => void;
-  setEmail: (email: string) => void;
-  setUserName: (userName: string) => void;
-  setPassword: (password: string) => void;
 };
 
-const Register = ({
-  email,
-  userName,
-  password,
-  handleSubmit,
-  setEmail,
-  setUserName,
-  setPassword,
-}: TRegisterProps) => {
+const Register = ({ control, handleSubmit }: TRegisterProps) => {
   return (
     <ThemedView className="p-10">
       <FormControl className="flex gap-5">
         <FormInput
           label="Username"
           placeholder="Enter your user name"
-          value={userName}
-          onChangeText={userName => setUserName(userName)}
-          type="text"
+          name="userName"
+          autoFocus
+          control={control}
         />
+
         <FormInput
           label="Password"
           placeholder="Enter your password"
-          value={password}
-          onChangeText={password => setPassword(password)}
+          name="password"
           type="password"
+          control={control}
         />
+
         <FormInput
           label="Email"
           placeholder="Enter your email"
-          value={email}
-          onChangeText={email => setEmail(email)}
+          name="email"
           type="text"
-          autoFocus
           keyboardType="email-address"
+          control={control}
         />
       </FormControl>
       <Button onPress={handleSubmit} className="mt-5">
