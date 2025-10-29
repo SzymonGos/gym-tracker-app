@@ -1,14 +1,20 @@
 import { Button, ButtonText } from '@/components/ui/button';
 import { AppDispatch, RootState } from '@/store';
 import { signOutUser } from '@/store/auth/authSlice';
-import { Link } from 'expo-router';
-import React from 'react';
+import { Link, router } from 'expo-router';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (user.session && user.user) {
+      router.push('/workout');
+    }
+  }, [user.session, user.user]);
 
   if (!user.session && !user.user) {
     return (
