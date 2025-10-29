@@ -1,13 +1,13 @@
-import { View, Text, FlatList } from 'react-native';
+import { Text, FlatList } from 'react-native';
 import React from 'react';
 import ThemedView from '../ThemedView/ThemedView';
 import { Exercise } from '@/store/exercises/exercisesSlice';
 
-type ExercisesProps = {
+type TExercisesProps = {
   exercises: Exercise[];
 };
 
-const Exercises = ({ exercises }: ExercisesProps) => {
+const Exercises = ({ exercises }: TExercisesProps) => {
   return (
     <ThemedView isSafeArea>
       <Text>{exercises?.length}</Text>

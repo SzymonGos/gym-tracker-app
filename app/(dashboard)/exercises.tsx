@@ -1,7 +1,7 @@
 import ExercisesContainer from '@/components/Exercises/ExercisesContainer';
 
-const Excercises = () => {
+const Exercises = () => {
   return <ExercisesContainer />;
 };
 
-export default Excercises;
+export default Exercises;

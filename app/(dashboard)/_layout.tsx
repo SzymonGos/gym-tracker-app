@@ -27,9 +27,9 @@ const DashboardLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="excercises"
+        name="exercises"
         options={{
-          title: 'Excercises',
+          title: 'Exercises',
           tabBarIcon: () => <Ionicons name="body" size={24} color="black" />,
         }}
       />
