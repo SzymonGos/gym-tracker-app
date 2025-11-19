@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { Provider, useDispatch } from 'react-redux';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabaseClient';
 import { store, AppDispatch } from '@/store';
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 import { setSession } from '@/store/auth/authSlice';
 import '@/global.css';
+import { queryClient } from '@/lib/tanstackClient';
+import { QueryClientProvider } from '@tanstack/react-query';
 
 const AppContent = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,11 +36,13 @@ const AppContent = () => {
 
 const RootLayout = () => {
   return (
-    <Provider store={store}>
-      <GluestackUIProvider mode="dark">
-        <AppContent />
-      </GluestackUIProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <GluestackUIProvider mode="light">
+          <AppContent />
+        </GluestackUIProvider>
+      </Provider>
+    </QueryClientProvider>
   );
 };
 
