@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { User } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabaseClient';
 
 export interface UserState {
   user: User | null;

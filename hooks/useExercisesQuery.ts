@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { Exercise } from '@/store/exercises/exercisesSlice';
 import { useQuery } from '@tanstack/react-query';
 
-export const useExercises = () => {
+export const useExercisesQuery = () => {
   return useQuery({
     queryKey: ['exercises'],
     queryFn: async () => {
