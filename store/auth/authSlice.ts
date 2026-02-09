@@ -38,12 +38,9 @@ export const signUpUser = createAsyncThunk(
     const { data } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          display_name: username,
-        },
-      },
-    });
+      options: { data: { display_name: username } },
+    });  
+    
     return data.user;
   }
 );
@@ -76,6 +73,11 @@ export const userSlice = createSlice({
       .addCase(signUpUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+      })
+      .addCase(signUpUser.rejected, state => {
+        state.isLoading = false;
+        state.user = null;
+        state.session = null;
       })
 
       .addCase(signInUser.pending, state => {

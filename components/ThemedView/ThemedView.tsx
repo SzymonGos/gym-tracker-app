@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type ThemedViewProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   isSafeArea?: boolean;
 };

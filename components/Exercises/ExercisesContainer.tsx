@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Exercises from './Exercises';
-import { AppDispatch, RootState } from '@/store';
-import { useDispatch, useSelector } from 'react-redux';
 import ThemedView from '../ThemedView/ThemedView';
-import { ActivityIndicator, Text } from 'react-native';
-import { fetchExercises } from '@/store/exercises/exercisesSlice';
+import { ActivityIndicator } from 'react-native';
+import { Exercise } from '@/store/exercises/exercisesSlice';
+import { useExercisesQuery } from '@/hooks/useExercisesQuery';
 
 const ExercisesContainer = () => {
-  const { exercises, isLoading, error } = useSelector(
-    (state: RootState) => state.exercises
+  const { data: exercises, isLoading } = useExercisesQuery();
+  // create modal context
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedExercise, setSelectedExercise] = useState<Exercise>(
+    {} as Exercise
   );
-  const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(fetchExercises());
-  }, [dispatch]);
+
+  const handleExercisePress = (exercise: Exercise) => {
+    setSelectedExercise(exercise);
+    setIsModalOpen(true);
+  };
 
   if (isLoading) {
     return (
@@ -22,14 +25,16 @@ const ExercisesContainer = () => {
       </ThemedView>
     );
   }
-  if (error) {
-    return (
-      <ThemedView isSafeArea>
-        <Text>Error: {error}</Text>
-      </ThemedView>
-    );
-  }
-  return <Exercises exercises={exercises} />;
+
+  return (
+    <Exercises
+      exercises={exercises || []}
+      onPress={handleExercisePress}
+      selectedExercise={selectedExercise}
+      isModalOpen={isModalOpen}
+      onModalClose={() => setIsModalOpen(false)}
+    />
+  );
 };
 
 export default ExercisesContainer;

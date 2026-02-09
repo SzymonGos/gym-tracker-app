@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user.session && user.user) {
-      router.push('/workout');
+      router.replace('/(dashboard)/workout');
     }
   }, [user.session, user.user]);
 
